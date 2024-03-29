@@ -1,2 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <style name="circle_anim">
+        <item name="android:layout_width">6dp</item>
+        <item name="android:layout_height">6dp</item>
+        <item name="android:background">@drawable/circle_main_unactive</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="button_group">
+        <item name="android:layout_width">120dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:fontFamily">@font/andika_bold_font</item>
+        <item name="android:textSize">10dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="icon_ntf">
+        <item name="android:layout_width">65dp</item>
+        <item name="android:layout_height">65dp</item>
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:scaleType">fitStart</item>
+    </style>
+    <style name="title_ntf">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">90dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:fontFamily">@font/andika_bold_font</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">@color/main_text_color</item>
+    </style>
+    <style name="priceBottom_ntf">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">90dp</item>
+        <item name="android:layout_marginTop">30dp</item>
+        <item name="android:fontFamily">@font/andika_font_regular</item>
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">@color/third_text_color</item>
+    </style>
+    <style name="percent_ntf">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">165dp</item>
+        <item name="android:layout_marginTop">30dp</item>
+        <item name="android:fontFamily">@font/andika_bold_font</item>
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">@color/green_text_color</item>
+    </style>
+    <style name="code_ntf">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">20dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:fontFamily">@font/andika_bold_font</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">@color/main_text_color</item>
+        <item name="android:layout_alignParentEnd">true</item>
+    </style>
+    <style name="priceEnd_ntf">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">20dp</item>
+        <item name="android:layout_marginTop">30dp</item>
+        <item name="android:fontFamily">@font/andika_bold_font</item>
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">@color/second_text_color</item>
+        <item name="android:layout_alignParentEnd">true</item>
+    </style>
+    <style name="line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1.5dp</item>
+        <item name="android:layout_marginStart">90dp</item>
+        <item name="android:layout_marginTop">75dp</item>
+        <item name="android:background">@color/line_color</item>
+    </style>
+    <style name="button_second_menu">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:layout_marginTop">48dp</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:background">@drawable/button_active_lists</item>
+        <item name="android:elevation">15dp</item>
+        <item name="android:textColor">@color/total_balance_color</item>
+        <item name="android:fontFamily">@font/andika_bold_font</item>
+        <item name="android:textSize">10dp</item>
+    </style>
+    <style name="icon_second_menu">
+        <item name="android:layout_width">25dp</item>
+        <item name="android:layout_height">25dp</item>
+        <item name="android:layout_marginTop">15dp</item>
+    </style>
+</resources>

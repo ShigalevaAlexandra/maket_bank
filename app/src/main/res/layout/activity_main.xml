@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     tools:ignore="HardcodedText"
-    android:background="@color/main_background_color">
+    android:background="@color/main_color">
 
     <!--Главное меню-->
     <RelativeLayout
@@ -14,24 +14,57 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@color/main_background_color"
+        android:background="@drawable/main_menu_radius"
+        android:elevation="15dp"
         tools:ignore="MissingConstraints">
+
+        <!--Отображение аватара и кнопки "добавить"-->
+        <RelativeLayout
+            android:id="@+id/avatar_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:id="@+id/add"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="20dp"
+                android:scaleType="fitStart"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/add" />
+
+            <ImageView
+                android:id="@+id/avatar"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="20dp"
+                android:scaleType="fitStart"
+                android:src="@drawable/avatar" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/total_balance_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="Общий баланс"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/andika_bold_font"
             android:gravity="center"
-            tools:ignore="MissingConstraints"/>
+            android:text="Общий баланс"
+            android:textColor="@color/main_text_color"
+            android:textSize="10dp"
+            tools:ignore="MissingConstraints,TextSizeCheck" />
 
         <TextView
             android:id="@+id/total_balance_amount"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/total_balance_title"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
             android:text="145 745,67$"
+            android:fontFamily="@font/andika_bold_font"
+            android:textSize="33dp"
+            android:textColor="@color/total_balance_color"
             android:gravity="center"
             tools:ignore="MissingConstraints"/>
 
@@ -40,12 +73,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/total_balance_amount"
-            android:text="+ 1768,25$ (12,1%) за 1 день"
+            android:fontFamily="@font/andika_bold_font"
             android:gravity="center"
-            tools:ignore="MissingConstraints"/>
+            android:text="+ 1768,25$ (12,1%) за день"
+            android:textColor="@color/second_text_color"
+            android:textSize="13dp"
+            tools:ignore="MissingConstraints,TextSizeCheck" />
 
         <!--Отображение перехода между активити-->
         <RelativeLayout
+            android:id="@+id/circle_animation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/add_day_amount"
@@ -54,33 +91,472 @@
             android:layout_centerInParent="true">
 
             <View
-                android:layout_width="8dp"
-                android:layout_height="8dp"
+                android:id="@+id/circle_1"
+                style="@style/circle_anim"
                 android:background="@drawable/circle_main_active"
-                android:gravity="center"
                 tools:ignore="MissingConstraints" />
 
             <View
-                android:layout_width="8dp"
-                android:layout_height="8dp"
+                android:id="@+id/circle_2"
+                style="@style/circle_anim"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
-                android:background="@drawable/circle_main_unactive"
-                android:gravity="center"
                 tools:ignore="MissingConstraints" />
 
             <View
-                android:layout_width="8dp"
-                android:layout_height="8dp"
+                android:id="@+id/circle_3"
+                style="@style/circle_anim"
                 android:layout_marginStart="30dp"
-                android:background="@drawable/circle_main_unactive"
-                android:gravity="center"
                 tools:ignore="MissingConstraints" />
         </RelativeLayout>
 
+        <!--Отображение кнопки активы/коллекции-->
+        <RelativeLayout
+            android:id="@+id/button_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/add_day_amount"
+            android:layout_marginTop="42dp"
+            android:layout_marginBottom="20dp"
+            android:layout_centerInParent="true">
+
+            <TextView
+                android:id="@+id/bcgr_button_group"
+                android:layout_width="255dp"
+                android:layout_height="35dp"
+                android:background="@drawable/group_active_list"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/button_actives"
+                style="@style/button_group"
+                android:layout_marginStart="2dp"
+                android:background="@drawable/button_active_lists"
+                android:text="Активы"
+                android:textColor="@color/second_text_color"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/button_lists"
+                style="@style/button_group"
+                android:layout_marginStart="132dp"
+                android:text="NTF коллекции"
+                android:textColor="@color/main_text_color"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+        </RelativeLayout>
     </RelativeLayout>
 
+    <!--Отображение списка NTF-->
+    <RelativeLayout
+        android:id="@+id/table_actives"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="230dp"
+        android:layout_marginBottom="110dp"
+        tools:ignore="MissingConstraints" >
 
+        <!--Отображение BITCOIN-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
+            <ImageView
+                android:id="@+id/bitcoin_png"
+                style="@style/icon_ntf"
+                android:src="@drawable/bitcoin" />
 
+            <TextView
+                android:id="@+id/bitcoin_title"
+                style="@style/title_ntf"
+                android:text="Bitcoin"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/bitcoin_priceBottom"
+                style="@style/priceBottom_ntf"
+                android:text="36 187,43 $"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/bitcoin_percent"
+                style="@style/percent_ntf"
+                android:text="+2,68 %"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/bitcoin_code"
+                style="@style/code_ntf"
+                android:text="0,014 BTC"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/bitcoin_priceEnd"
+                style="@style/priceEnd_ntf"
+                android:text="50,66 $"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+        </RelativeLayout>
+
+        <View
+            style="@style/line"/>
+
+        <!--Отображение ETHEREUM-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="85dp">
+
+            <ImageView
+                android:id="@+id/ethereum_png"
+                style="@style/icon_ntf"
+                android:src="@drawable/ethereum" />
+
+            <TextView
+                android:id="@+id/ethereum_title"
+                style="@style/title_ntf"
+                android:text="Ethereum"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/ethereum_priceBottom"
+                style="@style/priceBottom_ntf"
+                android:text="2 220,56 $"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/ethereum_percent"
+                style="@style/percent_ntf"
+                android:layout_marginStart="156dp"
+                android:text="+4,45 %"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/ethereum_code"
+                style="@style/code_ntf"
+                android:text="0,052739 ETH"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/ethereum_priceEnd"
+                style="@style/priceEnd_ntf"
+                android:text="117,11 $"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+        </RelativeLayout>
+
+        <View
+            style="@style/line"
+            android:layout_marginTop="160dp"/>
+
+        <!--Отображение SMART_CHAIN-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="170dp">
+
+            <ImageView
+                android:id="@+id/smartChain_png"
+                style="@style/icon_ntf"
+                android:src="@drawable/smart_chain" />
+
+            <TextView
+                android:id="@+id/smartChain_title"
+                style="@style/title_ntf"
+                android:text="Smart Chain"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/smartChain_priceBottom"
+                style="@style/priceBottom_ntf"
+                android:text="306,82 $"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/smartChain_percent"
+                style="@style/percent_ntf"
+                android:layout_marginStart="146dp"
+                android:text="+4,17 %"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/smartChain_code"
+                style="@style/code_ntf"
+                android:text="124,93463 BNB"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/smartChain_priceEnd"
+                style="@style/priceEnd_ntf"
+                android:text="38 332,44 $"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+        </RelativeLayout>
+
+        <View
+            style="@style/line"
+            android:layout_marginTop="245dp"/>
+
+        <!--Отображение PANCAKESWAP-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="255dp">
+
+            <ImageView
+                android:id="@+id/pancakeSwap_png"
+                style="@style/icon_ntf"
+                android:src="@drawable/pancake_swap" />
+
+            <TextView
+                android:id="@+id/pancakeSwap_title"
+                style="@style/title_ntf"
+                android:text="PancakeSwap"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/pancakeSwap_priceBottom"
+                style="@style/priceBottom_ntf"
+                android:text="14,47 $"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/pancakeSwap_percent"
+                style="@style/percent_ntf"
+                android:layout_marginStart="138dp"
+                android:text="+5,78 %"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/pancakeSwap_code"
+                style="@style/code_ntf"
+                android:text="4 382,323 CAKE"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/pancakeSwap_priceEnd"
+                style="@style/priceEnd_ntf"
+                android:text="63 412,21 $"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+        </RelativeLayout>
+
+        <View
+            style="@style/line"
+            android:layout_marginTop="330dp"/>
+
+        <!--Отображение BINANCE USD-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="340dp">
+
+            <ImageView
+                android:id="@+id/binanceUsd_png"
+                style="@style/icon_ntf"
+                android:src="@drawable/binance_usd" />
+
+            <TextView
+                android:id="@+id/binanceUsd_title"
+                style="@style/title_ntf"
+                android:text="Binance USD"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/binanceUsd_priceBottom"
+                style="@style/priceBottom_ntf"
+                android:text="1,00 $"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/binanceUsd_percent"
+                style="@style/percent_ntf"
+                android:layout_marginStart="133dp"
+                android:textColor="@color/red_text_color"
+                android:text="-0,01 %"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/binanceUsd_code"
+                style="@style/code_ntf"
+                android:text="8 253,32 BUSD"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/binanceUsd_priceEnd"
+                style="@style/priceEnd_ntf"
+                android:text="8 253,32 $"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+        </RelativeLayout>
+
+        <View
+            style="@style/line"
+            android:layout_marginTop="415dp"/>
+
+        <!--Отображение WISE WIN TOKEN-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="425dp">
+
+            <ImageView
+                android:id="@+id/wiseWinToken_png"
+                style="@style/icon_ntf"
+                android:src="@drawable/wise" />
+
+            <TextView
+                android:id="@+id/wiseWinToken_title"
+                style="@style/title_ntf"
+                android:text="Wise Win Token"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/wiseWinToken_priceBottom"
+                style="@style/priceBottom_ntf"
+                android:text="1,32 $"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/wiseWinToken_percent"
+                style="@style/percent_ntf"
+                android:layout_marginStart="133dp"
+                android:text="+5,31 %"
+                tools:ignore="MissingConstraints,TextSizeCheck"/>
+
+            <TextView
+                android:id="@+id/wiseWinToken_code"
+                style="@style/code_ntf"
+                android:text="26 954,49287345 WWT"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/wiseWinToken_priceEnd"
+                style="@style/priceEnd_ntf"
+                android:text="35 579,93 $"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <!--Отображение нижней панели навигации-->
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="760dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:columnCount="4">
+
+        <!--Отображение раздел "кошелек"-->
+        <TextView
+            android:id="@+id/button_koshelek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:paddingTop="48dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="10dp"
+            android:background="@drawable/button_active_lists"
+            android:text="Кошелек"
+            android:elevation="3dp"
+            android:textColor="@color/total_balance_color"
+            android:fontFamily="@font/andika_bold_font"
+            android:textSize="10dp"
+            android:layout_column="0"
+            tools:ignore="MissingConstraints,TextSizeCheck" />
+
+        <!--Отображение раздел "рынок"-->
+        <TextView
+            android:id="@+id/button_rinok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="23dp"
+            android:paddingTop="48dp"
+            android:paddingLeft="22dp"
+            android:paddingRight="22dp"
+            android:paddingBottom="10dp"
+            android:background="@drawable/button_second_menu"
+            android:text="Рынок"
+            android:elevation="3dp"
+            android:textColor="@color/total_balance_color"
+            android:fontFamily="@font/andika_bold_font"
+            android:textSize="10dp"
+            android:layout_column="1"
+            tools:ignore="MissingConstraints,TextSizeCheck" />
+
+        <!--Отображение раздел "обмен"-->
+        <TextView
+            android:id="@+id/button_obmen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="23dp"
+            android:paddingTop="48dp"
+            android:paddingLeft="22dp"
+            android:paddingRight="22dp"
+            android:paddingBottom="10dp"
+            android:background="@drawable/button_second_menu"
+            android:text="Обмен"
+            android:elevation="3dp"
+            android:textColor="@color/total_balance_color"
+            android:fontFamily="@font/andika_bold_font"
+            android:textSize="10dp"
+            android:layout_column="2"
+            tools:ignore="MissingConstraints,TextSizeCheck" />
+
+        <!--Отображение раздел "настройки"-->
+        <TextView
+            android:id="@+id/button_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="23dp"
+            android:paddingTop="48dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="10dp"
+            android:background="@drawable/button_second_menu"
+            android:text="Настройки"
+            android:elevation="3dp"
+            android:textColor="@color/total_balance_color"
+            android:fontFamily="@font/andika_bold_font"
+            android:textSize="10dp"
+            android:layout_column="3"
+            tools:ignore="MissingConstraints,TextSizeCheck" />
+    </GridLayout>
+
+    <!--Отображение иконок нижней панели навигации-->
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="760dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:columnCount="4">
+
+        <!--Отображение иконки "кошелек"-->
+        <ImageView
+            android:id="@+id/icon_koshelek"
+            style="@style/icon_second_menu"
+            android:layout_marginStart="25dp"
+            android:src="@drawable/koshelek"
+            android:layout_column="0"/>
+
+        <!--Отображение иконки "рынок"-->
+        <ImageView
+            android:id="@+id/icon_rinok"
+            style="@style/icon_second_menu"
+            android:layout_marginStart="72dp"
+            android:src="@drawable/rinok"
+            android:layout_column="1"/>
+
+        <!--Отображение иконки "обмен"-->
+        <ImageView
+            android:id="@+id/icon_obmen"
+            style="@style/icon_second_menu"
+            android:layout_marginStart="74dp"
+            android:src="@drawable/obmen"
+            android:layout_column="2"/>
+
+        <!--Отображение иконки "настройки"-->
+        <ImageView
+            android:id="@+id/icon_settings"
+            style="@style/icon_second_menu"
+            android:layout_marginStart="74dp"
+            android:src="@drawable/settings"
+            android:layout_column="3"/>
+    </GridLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
